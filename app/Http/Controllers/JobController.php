@@ -13,7 +13,7 @@ class JobController extends Controller
     {
         return view('jobs.index', [
             'heading' => 'Latest Jobs',
-            'jobs' => Job::latest()->filter(request(['tag', 'search']))->get()
+            'jobs' => Job::latest()->filter(request(['tag', 'search']))->paginate(5)
         ]);
     }
 
