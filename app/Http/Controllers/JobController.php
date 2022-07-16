@@ -52,4 +52,34 @@ class JobController extends Controller
 
         return redirect('/')->with('message', 'Job Created Successfully');
     }
+
+    public function edit($id) {
+        return view('jobs.edit', [
+            'job' => Job::find($id)
+        ]);
+    }
+
+    // Update job
+    public function update(Request $req, $id)
+    {
+        $job = Job::find($id);
+        $fields = $req->validate([
+            'title' => 'required',
+            'company' => ['required'],
+            'location' => 'required',
+            'website' => 'required',
+            'email' => ['required', 'email'],
+            'tags' => 'required',
+            'description' => 'required'
+        ]);
+
+        if($req->hasFile('logo')) {
+            $fields['logo'] = $req->file('logo')->store('logos', 'public');
+        }
+
+        $job->update($fields);
+
+        return back()->with('message', 'Job Edited Successfully');
+    }
+
 }
