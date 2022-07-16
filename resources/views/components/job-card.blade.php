@@ -2,7 +2,7 @@
 
 <x-card>
     <div class="flex">
-        <img class="hidden w-48 mr-6 md:block" src="images/acme.png" alt="" />
+        <img class="hidden w-48 mr-6 md:block" src="{{$job->logo ? asset('storage/' . $job->logo) : asset('images/acme.png')}}" alt="" />
         <div>
             <h3 class="text-2xl">
                 <a href="/jobs/{{ $job->id }}">{{ $job->title }}</a>

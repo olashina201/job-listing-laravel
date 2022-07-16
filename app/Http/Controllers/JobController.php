@@ -44,6 +44,10 @@ class JobController extends Controller
             'description' => 'required'
         ]);
 
+        if($req->hasFile('logo')) {
+            $fields['logo'] = $req->file('logo')->store('logos', 'public');
+        }
+
         Job::create($fields);
 
         return redirect('/')->with('message', 'Job Created Successfully');
