@@ -30,10 +30,10 @@ class JobController extends Controller
     {
         return view('jobs.create');
     }
-    
+
     // Store job
     public function store(Request $req)
-    { 
+    {
         $fields = $req->validate([
             'title' => 'required',
             'company' => ['required', Rule::unique('jobs', 'company')],
@@ -46,6 +46,6 @@ class JobController extends Controller
 
         Job::create($fields);
 
-        return redirect('/');
+        return redirect('/')->with('message', 'Job Created Successfully');
     }
 }
