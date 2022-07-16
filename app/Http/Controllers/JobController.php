@@ -82,4 +82,9 @@ class JobController extends Controller
         return back()->with('message', 'Job Edited Successfully');
     }
 
+    public function destroy($id) {
+        $job = Job::find($id);
+        $job->delete();
+        return redirect('/')->with('message', 'Job Deleted Successfully');
+    }
 }
