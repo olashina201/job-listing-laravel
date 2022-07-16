@@ -4,8 +4,9 @@
 
 @foreach ($jobs as $job)
     <h2>
-        <a href="">{{$job->title}}</a>
+        <a href="/jobs/{{$job->id}}">{{$job->title}}</a>
     </h2>
+    <p>{{$job->description}}</p>
 @endforeach
     
 @endunless
