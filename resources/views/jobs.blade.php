@@ -1,8 +1,8 @@
 @extends('layout')
 
 @section('content')
-@include('partials._hero')
-@include('partials._search')
+    @include('partials._hero')
+    @include('partials._search')
 
     <div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4">
 
@@ -13,9 +13,9 @@
                         <img class="hidden w-48 mr-6 md:block" src="images/acme.png" alt="" />
                         <div>
                             <h3 class="text-2xl">
-                                <a href="/jobs/{{$job->id}}">{{$job->title}}</a>
+                                <a href="/jobs/{{ $job->id }}">{{ $job->title }}</a>
                             </h3>
-                            <div class="text-xl font-bold mb-4">{{$job->company}}</div>
+                            <div class="text-xl font-bold mb-4">{{ $job->company }}</div>
                             <ul class="flex">
                                 <li
                                     class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs">
@@ -35,7 +35,7 @@
                                 </li>
                             </ul>
                             <div class="text-lg mt-4">
-                                <i class="fa-solid fa-location-dot"></i> {{$job->location}}
+                                <i class="fa-solid fa-location-dot"></i> {{ $job->location }}
                             </div>
                         </div>
                     </div>
