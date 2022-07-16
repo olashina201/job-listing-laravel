@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class JobController extends Controller
 {
@@ -28,5 +29,23 @@ class JobController extends Controller
     public function create()
     {
         return view('jobs.create');
+    }
+    
+    // Store job
+    public function store(Request $req)
+    { 
+        $fields = $req->validate([
+            'title' => 'required',
+            'company' => ['required', Rule::unique('jobs', 'company')],
+            'location' => 'required',
+            'website' => 'required',
+            'email' => ['required', 'email'],
+            'tags' => 'required',
+            'description' => 'required'
+        ]);
+
+        Job::create($fields);
+
+        return redirect('/');
     }
 }
