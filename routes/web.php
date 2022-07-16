@@ -21,8 +21,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/jobs/{id}', function (Job $job) {
+Route::get('/jobs/{id}', function ($id) {
     return view('job', [
-        'job' => $job
+        'job' => Job::find($id)
     ]);
 });
