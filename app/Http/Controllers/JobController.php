@@ -23,4 +23,10 @@ class JobController extends Controller
             'job' => Job::find($id)
         ]);
     }
+
+    // Create job
+    public function create()
+    {
+        return view('jobs.create');
+    }
 }
