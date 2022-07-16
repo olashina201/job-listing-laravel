@@ -10,17 +10,17 @@ class JobController extends Controller
     // show all jobs
     public function index()
     {
-        return view('jobs', [
+        return view('jobs.index', [
             'heading' => 'Latest Jobs',
             'jobs' => Job::all()
         ]);
     }
 
     // single job
-    public function show(Job $job)
+    public function show($id)
     {
-        return view('job', [
-            'job' => $job
+        return view('jobs.job', [
+            'job' => Job::find($id)
         ]);
     }
 }
