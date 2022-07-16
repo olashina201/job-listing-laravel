@@ -17,7 +17,13 @@ class JobFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
+            'title' => fake()->sentence(),
+            'tags' => 'Laravel, api, Backend',
+            'company' => fake()->company(),
+            'location' => fake()->city(),
+            'email' => fake()->companyEmail(),
+            'website' => fake()->url(),
+            'description' => fake()->paragraph(10),
         ];
     }
 }
