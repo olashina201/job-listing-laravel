@@ -32,9 +32,9 @@ class JobController extends Controller
     }
 
     // Store job
-    public function store(Request $req)
+    public function store(Request $request)
     {
-        $fields = $req->validate([
+        $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required', Rule::unique('jobs', 'company')],
             'location' => 'required',
@@ -44,11 +44,14 @@ class JobController extends Controller
             'description' => 'required'
         ]);
 
-        if($req->hasFile('logo')) {
-            $fields['logo'] = $req->file('logo')->store('logos', 'public');
+        if ($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
-        Job::create($fields);
+        //store user id
+        $formFields['user_id'] = auth()->user()->id;
+
+        Job::create($formFields);
 
         return redirect('/')->with('message', 'Job Created Successfully');
     }
@@ -60,10 +63,14 @@ class JobController extends Controller
     }
 
     // Update job
-    public function update(Request $req, $id)
+    public function update(Request $request, Job $listing)
     {
-        $job = Job::find($id);
-        $fields = $req->validate([
+        // Make sure logged in user is owner
+        if ($listing->user_id != auth()->id()) {
+            abort(403, "Unauthorized Action");
+        }
+
+        $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required'],
             'location' => 'required',
@@ -73,11 +80,11 @@ class JobController extends Controller
             'description' => 'required'
         ]);
 
-        if($req->hasFile('logo')) {
-            $fields['logo'] = $req->file('logo')->store('logos', 'public');
+        if ($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
-        $job->update($fields);
+        $listing->update($formFields);
 
         return back()->with('message', 'Job Edited Successfully');
     }
@@ -86,5 +93,13 @@ class JobController extends Controller
         $job = Job::find($id);
         $job->delete();
         return redirect('/')->with('message', 'Job Deleted Successfully');
+    }
+
+    // Manage Listings
+    public function manage()
+    {
+        return view("listings.manage", [
+            'listings' => auth()->user()->listings()->get()
+        ]);
     }
 }
