@@ -63,10 +63,12 @@ class JobController extends Controller
     }
 
     // Update job
-    public function update(Request $request, Job $listing)
+    public function update(Request $request, $id)
     {
+        $listing = Job::find($id);
+
         // Make sure logged in user is owner
-        if ($listing->user_id != auth()->id()) {
+        if ($listing->user->id != auth()->user()->id) {
             abort(403, "Unauthorized Action");
         }
 
