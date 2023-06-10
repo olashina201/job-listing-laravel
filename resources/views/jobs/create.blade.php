@@ -4,9 +4,9 @@
         <div class="bg-gray-50 border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24">
             <header class="text-center">
                 <h2 class="text-2xl font-bold uppercase mb-1">
-                    Create a Gig
+                    Create a Job
                 </h2>
-                <p class="mb-4">Post a gig to find a developer</p>
+                <p class="mb-4">Post a Job to find a developer</p>
             </header>
 
             <form action="/jobs" method="POST" enctype="multipart/form-data">
