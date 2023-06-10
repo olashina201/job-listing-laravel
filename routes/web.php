@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\UserController;
 use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::get('/jobs/{id}/edit', [JobController::class, 'edit']);
 Route::put('/jobs/{id}', [JobController::class, 'update']);
 Route::delete('/jobs/{id}', [JobController::class, 'destroy']);
 Route::get('/jobs/{id}', [JobController::class, 'show']);
+// Manage Listings
+Route::get('/listings/manage', [JobController::class, 'manage'])->middleware('auth');
 // Show Register/Create Form
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
