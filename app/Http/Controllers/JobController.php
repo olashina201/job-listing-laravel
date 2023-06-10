@@ -98,7 +98,7 @@ class JobController extends Controller
     // Manage Listings
     public function manage()
     {
-        return view("listings.manage", [
+        return view("jobs.manage", [
             'listings' => auth()->user()->listings()->get()
         ]);
     }
