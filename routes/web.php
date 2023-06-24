@@ -24,7 +24,7 @@ Route::put('/jobs/{id}', [JobController::class, 'update'])->middleware('auth');
 Route::delete('/jobs/{id}', [JobController::class, 'destroy'])->middleware('auth');
 Route::get('/jobs/{id}', [JobController::class, 'show']);
 // Manage Listings
-Route::get('/listings/manage', [JobController::class, 'manage'])->middleware('auth');
+Route::get('/jobs/manage', [JobController::class, 'manage'])->middleware('auth');
 // Show Register/Create Form
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
