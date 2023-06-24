@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [JobController::class, 'index']);
+Route::get('/jobs/manage', [JobController::class, 'manage'])->middleware('auth');
 Route::get('/jobs/create', [JobController::class, 'create'])->middleware('auth');
 Route::post('/jobs', [JobController::class, 'store'])->middleware('auth');
 Route::get('/jobs/{id}/edit', [JobController::class, 'edit'])->middleware('auth');
@@ -24,7 +25,6 @@ Route::put('/jobs/{id}', [JobController::class, 'update'])->middleware('auth');
 Route::delete('/jobs/{id}', [JobController::class, 'destroy'])->middleware('auth');
 Route::get('/jobs/{id}', [JobController::class, 'show']);
 // Manage Listings
-Route::get('/jobs/manage', [JobController::class, 'manage'])->middleware('auth');
 // Show Register/Create Form
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
